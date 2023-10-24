@@ -1,6 +1,11 @@
 package br.upf.sistemaRevendaVeiculos.model
 
+import jakarta.persistence.*
+
+@Entity
 data class Veiculo(
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
     val placa: String,
     val nome: String,
@@ -13,5 +18,22 @@ data class Veiculo(
     val kmRodado: Int,
     val fabricante: String,
     val tipoVeiculo: String,
+    @Enumerated(value = EnumType.STRING)
     val status: StatusVeiculo
 )
+
+//SLIDE 6
+//@Entity
+//data class Evento(
+// @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+// val id: Long? = null,
+// val nome: String,
+// val data: LocalDate,
+// val dataInicioInsc: LocalDateTime,
+// val dataFimInsc: LocalDateTime,
+// val descricao: String,
+// @Enumerated(value = EnumType.STRING)
+// val status: StatusEvento,
+// @OneToMany(mappedBy = "evento")
+// val inscritos: List<Inscricao> = listOf()
+//)
