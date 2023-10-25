@@ -17,24 +17,29 @@ class PessoaService(private val repository: PessoaRepository,
     }
 
     fun buscarPorId(id: Long): PessoaResponseDTO {
-        val pessoa = repository.findAll().firstOrNull{ it.id == id }
-            ?: throw NotFoundException("Pessoa não encontrada!")
+        val pessoa = repository.findById(id)
+            .orElseThrow { NotFoundException(PESSOA_NOT_FOUND_MESSAGE) }
         return converter.toPessoaResponseDTO(pessoa)
     }
-
-    fun cadastrar(dto: PessoaDTO) : PessoaResponseDTO {
-        val pessoa = repository.cadastrar(converter.toPessoa(dto))
-        return converter.toPessoaResponseDTO(pessoa)
+    fun cadastrar(dto: PessoaDTO): PessoaResponseDTO {
+        return converter.toPessoaResponseDTO(
+            repository.save(converter.toPessoa(dto)))
+    }
+    fun deletar(id: Long) {
+        repository.deleteById(id)
     }
 
     fun atualizar(id: Long, dto: PessoaDTO): PessoaResponseDTO {
-        val pessoa = repository.findAll().firstOrNull{ it.id == id}
-            ?: throw NotFoundException("Pessoa não encontrada!")
-        val pessoaAtualizada = repository.update(pessoa, converter.toPessoa(dto))
-        return converter.toPessoaResponseDTO(pessoaAtualizada)
-    }
-
-    fun deletar(id: Long) {
-        repository.deletar(id)
+        val pessoa = repository.findById(id)
+            .orElseThrow { NotFoundException(PESSOA_NOT_FOUND_MESSAGE) }
+            .copy(
+                cpfoucnpj = dto.cpfoucnpj,
+                nome = dto.nome,
+                telefone = dto.telefone,
+                cidade = dto.cidade,
+                endereco = dto.endereco,
+                tipo = dto.tipo
+            )
+        return converter.toPessoaResponseDTO(repository.save(pessoa))
     }
 }

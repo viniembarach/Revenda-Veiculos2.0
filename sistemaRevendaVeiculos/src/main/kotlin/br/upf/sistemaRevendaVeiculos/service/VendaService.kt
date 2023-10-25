@@ -16,24 +16,27 @@ class VendaService(private val repository: VendaRepository,
     }
 
     fun buscarPorId(id: Long): VendaResponseDTO {
-        val venda = repository.findAll().firstOrNull{ it.id == id }
-            ?: throw NotFoundException("Venda não encontrada!")
+        val venda = repository.findById(id)
+            .orElseThrow { NotFoundException( VENDA_NOT_FOUND_MESSAGE) }
         return converter.toVendaResponseDTO(venda)
     }
-
-    fun cadastrar(dto: VendaDTO) : VendaResponseDTO {
-        val venda = repository.cadastrar(converter.toVenda(dto))
-        return converter.toVendaResponseDTO(venda)
+    fun cadastrar(dto: VendaDTO): VendaResponseDTO {
+        return converter.toVendaResponseDTO(
+            repository.save(converter.toVenda(dto)))
+    }
+    fun deletar(id: Long) {
+        repository.deleteById(id)
     }
 
     fun atualizar(id: Long, dto: VendaDTO): VendaResponseDTO {
-        val venda = repository.findAll().firstOrNull{ it.id == id}
-            ?: throw NotFoundException("Venda não encontrada!")
-        val vendaAtualizada = repository.update(venda, converter.toVenda(dto))
-        return converter.toVendaResponseDTO(vendaAtualizada)
-    }
-
-    fun deletar(id: Long) {
-        repository.deletar(id)
+        val venda = repository.findById(id)
+            .orElseThrow { NotFoundException(VENDA_NOT_FOUND_MESSAGE) }
+            .copy(
+                dataVenda = dto.dataVenda,
+                veiculo = dto.veiculo,
+                cliente = dto.cliente,
+                vendedor = dto.vendedor
+            )
+        return converter.toVendaResponseDTO(repository.save(venda))
     }
 }

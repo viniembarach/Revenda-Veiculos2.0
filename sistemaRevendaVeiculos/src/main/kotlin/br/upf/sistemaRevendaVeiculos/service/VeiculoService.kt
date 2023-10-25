@@ -17,27 +17,35 @@ class VeiculoService(private val repository: VeiculoRepository,
     }
 
     fun buscarPorId(id: Long): VeiculoResponseDTO {
-        val veiculo = repository.findAll().firstOrNull{ it.id == id }
-            ?: throw NotFoundException("Veiculo não encontrado!")
+        val veiculo = repository.findById(id)
+            .orElseThrow { NotFoundException(VEICULO_NOT_FOUND_MESSAGE) }
         return converter.toVeiculoResponseDTO(veiculo)
     }
-
-    fun cadastrar(dto: VeiculoDTO) : VeiculoResponseDTO {
-        val veiculo = repository.cadastrar(converter.toVeiculo(dto))
-                return converter.toVeiculoResponseDTO(veiculo)
+    fun cadastrar(dto: VeiculoDTO): VeiculoResponseDTO {
+        return converter.toVeiculoResponseDTO(
+            repository.save(converter.toVeiculo(dto)))
+    }
+    fun deletar(id: Long) {
+        repository.deleteById(id)
     }
 
     fun atualizar(id: Long, dto: VeiculoDTO): VeiculoResponseDTO {
-        val veiculo = repository.findAll().firstOrNull{ it.id == id}
-            ?: throw NotFoundException("Veiculo não encontrado!")
-        val veiculoAtualizado = repository.update(veiculo, converter.toVeiculo(dto))
-        return converter.toVeiculoResponseDTO(veiculoAtualizado)
+        val veiculo = repository.findById(id)
+            .orElseThrow { NotFoundException(VENDA_NOT_FOUND_MESSAGE) }
+            .copy(
+                placa = dto.placa,
+                nome = dto.nome,
+                modelo = dto.modelo,
+                precoCompra = dto.precoCompra,
+                precoVenda = dto.precoVenda,
+                anoFabri = dto.anoFabri,
+                anoMod = dto.anoMod,
+                cor = dto.cor,
+                kmRodado = dto.kmRodado,
+                fabricante = dto.fabricante,
+                tipoVeiculo = dto.tipoVeiculo,
+                status = dto.status
+            )
+        return converter.toVeiculoResponseDTO(repository.save(veiculo))
     }
-
-
-    fun deletar(id: Long) {
-        repository.deletar(id)
-    }
-
-
 }

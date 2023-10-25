@@ -12,7 +12,7 @@ class VendaConverter {
             dataVenda = dto.dataVenda,
             veiculo = dto.veiculo,
             cliente = dto.cliente,
-            vendedor = dto.vendedor,
+            vendedor = dto.vendedor
         )
     }
 
@@ -22,7 +22,7 @@ class VendaConverter {
             dataVenda = venda.dataVenda,
             veiculo = venda.veiculo,
             cliente = venda.cliente,
-            vendedor = venda.vendedor,
+            vendedor = venda.vendedor
         )
     }
 }
