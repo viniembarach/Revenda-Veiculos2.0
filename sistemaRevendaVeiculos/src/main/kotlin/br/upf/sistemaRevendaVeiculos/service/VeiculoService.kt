@@ -31,7 +31,7 @@ class VeiculoService(private val repository: VeiculoRepository,
 
     fun atualizar(id: Long, dto: VeiculoDTO): VeiculoResponseDTO {
         val veiculo = repository.findById(id)
-            .orElseThrow { NotFoundException(VENDA_NOT_FOUND_MESSAGE) }
+            .orElseThrow { NotFoundException(VEICULO_NOT_FOUND_MESSAGE) }
             .copy(
                 placa = dto.placa,
                 nome = dto.nome,

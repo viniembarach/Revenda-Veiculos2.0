@@ -17,7 +17,7 @@ class VendaService(private val repository: VendaRepository,
 
     fun buscarPorId(id: Long): VendaResponseDTO {
         val venda = repository.findById(id)
-            .orElseThrow { NotFoundException( VENDA_NOT_FOUND_MESSAGE) }
+            .orElseThrow { NotFoundException(VENDA_NOT_FOUND_MESSAGE) }
         return converter.toVendaResponseDTO(venda)
     }
     fun cadastrar(dto: VendaDTO): VendaResponseDTO {
