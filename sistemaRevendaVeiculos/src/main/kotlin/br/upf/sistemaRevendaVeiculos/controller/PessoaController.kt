@@ -24,17 +24,21 @@ import org.springframework.web.util.UriComponentsBuilder
 @RestController
 @RequestMapping ("/pessoas")
 class PessoaController(val service: PessoaService) {
+
     @GetMapping
+    @Transactional
     fun listar(): List<PessoaResponseDTO> {
         return service.listar()
     }
 
     @GetMapping("/{id}")
+    @Transactional
     fun buscarPorId (@PathVariable id: Long): PessoaResponseDTO {
         return service.buscarPorId(id)
     }
 
     @PostMapping
+    @Transactional
     fun cadastra (@RequestBody @Valid dto: PessoaDTO,
                   uriBuilder: UriComponentsBuilder
     ): ResponseEntity<PessoaResponseDTO>{
@@ -45,6 +49,7 @@ class PessoaController(val service: PessoaService) {
     }
 
     @PutMapping("/{id}")
+    @Transactional
     fun atualizar(@PathVariable id: Long,
                   @RequestBody @Valid dto: PessoaDTO
     ):PessoaResponseDTO {
@@ -52,6 +57,7 @@ class PessoaController(val service: PessoaService) {
     }
 
     @DeleteMapping("/{id}")
+    @Transactional
     @ResponseStatus(HttpStatus.NO_CONTENT)
     fun deletar(@PathVariable id: Long) {
         service.deletar(id)
