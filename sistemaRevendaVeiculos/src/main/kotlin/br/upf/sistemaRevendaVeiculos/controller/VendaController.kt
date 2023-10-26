@@ -3,6 +3,7 @@ package br.upf.sistemaRevendaVeiculos.controller
 import br.upf.sistemaRevendaVeiculos.dto.VendaResponseDTO
 import br.upf.sistemaRevendaVeiculos.dto.VendaDTO
 import br.upf.sistemaRevendaVeiculos.service.VendaService
+import jakarta.transaction.Transactional
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity

@@ -1,10 +1,6 @@
 package br.upf.sistemaRevendaVeiculos.model
 
-import jakarta.persistence.Entity
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.GenerationType
-import jakarta.persistence.Id
-import jakarta.persistence.OneToMany
+import jakarta.persistence.*
 
 @Entity
 data class Pessoa(
@@ -16,5 +12,6 @@ data class Pessoa(
     val telefone: String,
     val cidade: String,
     val endereco: String,
+    @Enumerated(value = EnumType.STRING)
     val tipo: StatusPessoa
 )

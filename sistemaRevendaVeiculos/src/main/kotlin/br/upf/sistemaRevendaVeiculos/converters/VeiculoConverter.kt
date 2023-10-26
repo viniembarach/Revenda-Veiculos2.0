@@ -2,7 +2,6 @@ package br.upf.sistemaRevendaVeiculos.converters
 
 import br.upf.sistemaRevendaVeiculos.dto.VeiculoDTO
 import br.upf.sistemaRevendaVeiculos.dto.VeiculoResponseDTO
-import br.upf.sistemaRevendaVeiculos.model.StatusVeiculo
 import br.upf.sistemaRevendaVeiculos.model.Veiculo
 import org.springframework.stereotype.Component
 

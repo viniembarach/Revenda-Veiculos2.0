@@ -2,9 +2,8 @@ package br.upf.sistemaRevendaVeiculos.controller
 
 import br.upf.sistemaRevendaVeiculos.dto.VeiculoDTO
 import br.upf.sistemaRevendaVeiculos.dto.VeiculoResponseDTO
-import br.upf.sistemaRevendaVeiculos.model.StatusVeiculo
-import br.upf.sistemaRevendaVeiculos.model.Veiculo
 import br.upf.sistemaRevendaVeiculos.service.VeiculoService
+import jakarta.transaction.Transactional
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -17,8 +16,6 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestController
-import org.springframework.web.util.UriBuilder
-import org.springframework.web.util.UriComponents
 import org.springframework.web.util.UriComponentsBuilder
 
 @RestController
