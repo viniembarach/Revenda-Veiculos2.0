@@ -6,12 +6,12 @@ import jakarta.validation.constraints.NotNull
 import java.time.LocalDate
 
 data class VendaDTO(
-    @field:NotNull (message = "A Venda deve ter uma data" )
+    @field:NotNull (message = "A Venda deve ter uma data")
     val dataVenda : LocalDate,
-    @field:NotNull(message = "Venda sempre deve ter um veiculo" )
+    @field:NotNull(message = "Venda sempre deve ter um veiculo")
     val veiculo: Veiculo,
-    @field:NotNull(message = "Venda sempre deve ter um cliente" )
+    @field:NotNull(message = "Venda sempre deve ter um cliente")
     val cliente: Pessoa,
-    @field:NotNull(message = "Venda sempre deve ter um vendador" )
+    @field:NotNull(message = "Venda sempre deve ter um vendador")
     val vendedor: Pessoa
 )
