@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component
 
 @Component
 class PessoaConverter {
+
     fun toPessoa(dto: PessoaDTO): Pessoa {
         return Pessoa(
             cpfoucnpj = dto.cpfoucnpj,

@@ -8,6 +8,7 @@ import br.upf.sistemaRevendaVeiculos.repository.VeiculoRepository
 import br.upf.sistemaRevendaVeiculos.model.Veiculo
 import org.springframework.stereotype.Service
 
+private const val VEICULO_NOT_FOUND_MESSAGE = "Veiculo não encontrado!"
 @Service
 class VeiculoService(private val repository: VeiculoRepository,
     private val converter: VeiculoConverter){

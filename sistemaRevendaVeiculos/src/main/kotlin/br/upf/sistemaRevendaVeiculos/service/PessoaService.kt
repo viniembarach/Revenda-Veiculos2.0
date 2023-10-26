@@ -5,9 +5,9 @@ import br.upf.sistemaRevendaVeiculos.dto.PessoaDTO
 import br.upf.sistemaRevendaVeiculos.dto.PessoaResponseDTO
 import br.upf.sistemaRevendaVeiculos.exceptions.NotFoundException
 import br.upf.sistemaRevendaVeiculos.repository.PessoaRepository
-import br.upf.sistemaRevendaVeiculos.model.Pessoa
 import org.springframework.stereotype.Service
 
+private const val PESSOA_NOT_FOUND_MESSAGE = "Pessoa não encontrada!"
 @Service
 class PessoaService(private val repository: PessoaRepository,
                      private val converter: PessoaConverter){

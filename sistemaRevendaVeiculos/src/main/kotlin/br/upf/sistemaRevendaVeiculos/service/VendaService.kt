@@ -7,6 +7,7 @@ import br.upf.sistemaRevendaVeiculos.exceptions.NotFoundException
 import br.upf.sistemaRevendaVeiculos.repository.VendaRepository
 import org.springframework.stereotype.Service
 
+private const val VENDA_NOT_FOUND_MESSAGE = "Venda não encontrada!"
 @Service
 class VendaService(private val repository: VendaRepository,
                     private val converter: VendaConverter){
