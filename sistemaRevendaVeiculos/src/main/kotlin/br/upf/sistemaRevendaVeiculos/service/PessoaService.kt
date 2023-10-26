@@ -5,15 +5,21 @@ import br.upf.sistemaRevendaVeiculos.dto.PessoaDTO
 import br.upf.sistemaRevendaVeiculos.dto.PessoaResponseDTO
 import br.upf.sistemaRevendaVeiculos.exceptions.NotFoundException
 import br.upf.sistemaRevendaVeiculos.repository.PessoaRepository
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 
 private const val PESSOA_NOT_FOUND_MESSAGE = "Pessoa não encontrada!"
 @Service
 class PessoaService(private val repository: PessoaRepository,
                      private val converter: PessoaConverter){
-    fun listar(): List<PessoaResponseDTO> {
-        return repository.findAll()
-            .map(converter::toPessoaResponseDTO)
+    fun listar(nomePessoa: String?, paginacao: Pageable): Page<PessoaResponseDTO> {
+        val pessoas = if (nomePessoa == null) {
+            repository.findAll(paginacao)
+        } else {
+            repository.findByNome(nomePessoa, paginacao)
+        }
+        return pessoas.map(converter::toPessoaResponseDTO)
     }
 
     fun buscarPorId(id: Long): PessoaResponseDTO {

@@ -6,15 +6,22 @@ import br.upf.sistemaRevendaVeiculos.dto.VeiculoResponseDTO
 import br.upf.sistemaRevendaVeiculos.exceptions.NotFoundException
 import br.upf.sistemaRevendaVeiculos.repository.VeiculoRepository
 import br.upf.sistemaRevendaVeiculos.model.Veiculo
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 
 private const val VEICULO_NOT_FOUND_MESSAGE = "Veiculo não encontrado!"
 @Service
 class VeiculoService(private val repository: VeiculoRepository,
     private val converter: VeiculoConverter){
-    fun listar(): List<VeiculoResponseDTO> {
-        return repository.findAll()
-            .map(converter::toVeiculoResponseDTO)
+
+    fun listar(nomeVeiculo: String?, paginacao: Pageable): Page<VeiculoResponseDTO> {
+        val veiculos = if (nomeVeiculo == null) {
+            repository.findAll(paginacao)
+        } else {
+            repository.findByNome(nomeVeiculo, paginacao)
+        }
+        return veiculos.map(converter::toVeiculoResponseDTO)
     }
 
     fun buscarPorId(id: Long): VeiculoResponseDTO {
