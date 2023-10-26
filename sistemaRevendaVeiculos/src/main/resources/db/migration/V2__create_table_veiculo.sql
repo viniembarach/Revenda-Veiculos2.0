@@ -11,5 +11,5 @@ CREATE TABLE `veiculo` (
  `kmRodado`     bigint          NOT NULL,
  `fabricante`   varchar(255)    NOT NULL,
  `tipoVeiculo`  varchar(255)    NOT NULL,
- `status` enum('ABERTO','CANCELADO','ENCERRADO','PREVISTO') DEFAULT NULL
+ `status` enum('VENDIDO','EMESTOQUE') DEFAULT NULL
 );
