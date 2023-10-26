@@ -9,4 +9,3 @@ CREATE TABLE `venda` (
  FOREIGN KEY (`vendedor_id`) REFERENCES `pessoa` (`id`)
 
  );
-);
