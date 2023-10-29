@@ -14,5 +14,7 @@ data class PessoaDTO(
     val cidade: String,
     @field:NotEmpty (message = "Deve ter um endereço")
     val endereco: String,
-    val tipo: StatusPessoa
+    val tipo: StatusPessoa,
+    val senha: String,
+    val email: String
 )

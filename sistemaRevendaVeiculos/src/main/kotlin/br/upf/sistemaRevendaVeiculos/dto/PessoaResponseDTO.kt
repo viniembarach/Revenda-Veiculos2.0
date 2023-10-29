@@ -9,5 +9,6 @@ data class PessoaResponseDTO(
     val telefone: String,
     val cidade: String,
     val endereco: String,
-    val tipo: StatusPessoa
+    val tipo: StatusPessoa,
+    val email: String
 )

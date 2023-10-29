@@ -15,7 +15,9 @@ class PessoaConverter {
             telefone = dto.telefone,
             cidade = dto.cidade,
             endereco = dto.endereco,
-            tipo = dto.tipo
+            tipo = dto.tipo,
+            email = dto.email,
+            senha = dto.senha
         )
     }
 
@@ -27,7 +29,8 @@ class PessoaConverter {
             telefone = pessoa.telefone,
             cidade = pessoa.cidade,
             endereco = pessoa.endereco,
-            tipo = pessoa.tipo
+            tipo = pessoa.tipo,
+            email = pessoa.email
         )
     }
 }
