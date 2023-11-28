@@ -27,9 +27,8 @@ import org.springframework.data.web.PageableDefault
 class PessoaController(val service: PessoaService) {
 
     @GetMapping
-    fun listar(@RequestParam(required = false) nomePessoa: String?, @PageableDefault(size = 10) paginacao: Pageable)
-        : Page<PessoaResponseDTO> {
-        return service.listar(nomePessoa, paginacao)
+    fun listar(): List<PessoaResponseDTO> {
+        return service.listar()
     }
 
     @GetMapping("/{id}")

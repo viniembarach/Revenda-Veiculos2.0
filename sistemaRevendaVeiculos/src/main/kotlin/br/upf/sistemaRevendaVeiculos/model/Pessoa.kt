@@ -6,18 +6,19 @@ import org.springframework.security.core.userdetails.UserDetails
 
 @Entity
 data class Pessoa(
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
     val cpfoucnpj: String,
     val nome: String,
     val telefone: String,
     val cidade: String,
     val endereco: String,
+    val senha: String,
+    val email: String,
     @Enumerated(value = EnumType.STRING)
     val tipo: StatusPessoa,
     @Enumerated(value = EnumType.STRING)
-    val role: UserRole = UserRole.USER
+    val role: UserRole = UserRole.USER,
 )  : UserDetails {
     override fun getAuthorities(): MutableList<SimpleGrantedAuthority> =
         if (role == UserRole.ADMIN) mutableListOf(

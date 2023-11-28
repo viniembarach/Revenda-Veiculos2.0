@@ -13,13 +13,9 @@ private const val PESSOA_NOT_FOUND_MESSAGE = "Pessoa não encontrada!"
 @Service
 class PessoaService(private val repository: PessoaRepository,
                      private val converter: PessoaConverter){
-    fun listar(nomePessoa: String?, paginacao: Pageable): Page<PessoaResponseDTO> {
-        val pessoas = if (nomePessoa == null) {
-            repository.findAll(paginacao)
-        } else {
-            repository.findByNome(nomePessoa, paginacao)
-        }
-        return pessoas.map(converter::toPessoaResponseDTO)
+    fun listar(): List<PessoaResponseDTO> {
+        return repository.findAll()
+            .map(converter::toPessoaResponseDTO)
     }
 
     fun buscarPorId(id: Long): PessoaResponseDTO {
